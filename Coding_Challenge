@@ -1,0 +1,59 @@
+def total_card_length(card_number):      # Function to check number of digits in card are 16.
+    card_length = card_number
+    Validity = True
+    if "-" in card_number:
+        card_length = "".join(card_number.split("-"))
+        Validity = repeat_count(card_number)     # Called function repeat_count
+
+    if ((len(card_length) == 16) and Validity):
+        return True
+    else:
+        return False
+
+def card_numeric_value_check(card_number):      # Function to check if all inputs are numbers with no characters or special symbols.
+    if not card_number.isdigit():
+        for hyphen_check in card_number:
+            if not (hyphen_check.isdigit() | (hyphen_check == "-")):
+                return False
+    return True
+
+def correct_card_initials(card_number):     # Function to check if the card_initials are correct.
+    if int(card_number[0]) in card_initials:
+        return True
+    else:
+        return False
+
+def repeat_count(card_number):     # Function to check if the 16 digits of the card split in proper groups of 4
+    for number_count in card_number.split("-"):
+        if len(number_count) != 4:
+            return False
+
+    return True
+
+def card_number_repetition(card_number):        # Function to check if a digit repeats 4 or more times. Till 4 it passes else invalid
+    temp = "".join(card_number.split("-"))
+    for loop in range(len(temp)):
+        try:
+            if (temp[loop] == temp[loop+1]):
+                if (temp[loop+1] == temp[loop+2]):
+                    if (temp[loop+2] == temp[loop+3]):
+                        return False
+        except IndexError:
+           pass
+    return True
+
+
+total_cards = int(input())
+cards_list = []
+card_initials = [4,5,6]       # I want my card number to start with either 4 or 5 or 6
+
+for count in range(total_cards):    # 'N' inputs for desired number of credit cards which require evaluation
+    cards_list.append(input())
+
+for card_number in cards_list:
+
+    solution = [correct_card_initials(card_number), total_card_length(card_number),card_numeric_value_check(card_number), card_number_repetition(card_number)]
+    if False in solution:
+        print("Invalid")
+    else:
+        print("Valid")
