@@ -1,0 +1,7 @@
+---
+# vars file for ec2_instance
+instance_type: t2.micro
+security_group: praveen_reddy
+image: ami-0b500ef59d8335eee
+keypair: redhat
+region: us-east-2
